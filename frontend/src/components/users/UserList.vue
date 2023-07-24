@@ -5,7 +5,14 @@
         <span>
           <a-button>Edit 一 {{ record.name }}</a-button>
           <a-divider type="vertical" />
-          <a-button danger>Delete</a-button>
+          <a-popconfirm
+            title="Are you sure you want to delete this user?"
+            ok-text="Yes"
+            cancel-text="No"
+            @confirm="userStore.deleteUser(record.id)"
+          >
+            <a-button danger>Delete</a-button>
+          </a-popconfirm>
         </span>
       </template>
     </template>
