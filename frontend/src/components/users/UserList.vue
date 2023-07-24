@@ -1,28 +1,55 @@
 <template>
-  <a-table :dataSource="dataSource" :columns="columns">
-    <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'actions'">
-        <span>
-          <a-button>Edit 一 {{ record.name }}</a-button>
-          <a-divider type="vertical" />
-          <a-popconfirm
-            title="Are you sure you want to delete this user?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="userStore.deleteUser(record.id)"
+  <div>
+    <a-breadcrumb style="margin: 16px 0">
+      <a-breadcrumb-item>Home</a-breadcrumb-item>
+      <a-breadcrumb-item>Users</a-breadcrumb-item>
+    </a-breadcrumb>
+    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
+      <h4>
+        <span class="float-start">All Users</span>
+        <span class="float-end">
+          <a-button type="primary"
+            ><nuxt-link to="/users/new">Add User</nuxt-link></a-button
           >
-            <a-button danger>Delete</a-button>
-          </a-popconfirm>
         </span>
-      </template>
-    </template>
-  </a-table>
+      </h4>
+
+      <!-- begin::users list table -->
+      <a-table
+        :columns="columns"
+        :data-source="users"
+        :locale="{
+          emptyText: `Users you add will show up here`,
+        }"
+        class="mt-5"
+        rowKey="id"
+      >
+        <template #bodyCell="{ column, record }">
+          <template v-if="column.key === 'actions'">
+            <span>
+              <a-button>Edit 一 {{ record.name }}</a-button>
+              <a-divider type="vertical" />
+              <a-popconfirm
+                title="Are you sure you want to delete this user?"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="userStore.deleteUser(record.id)"
+              >
+                <a-button danger>Delete</a-button>
+              </a-popconfirm>
+            </span>
+          </template>
+        </template>
+      </a-table>
+      <!-- end::users list table -->
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
-const dataSource = ref([
+const users = ref([
   {
     key: "1",
     name: "Mike",
