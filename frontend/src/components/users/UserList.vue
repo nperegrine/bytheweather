@@ -27,7 +27,7 @@
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'actions'">
             <span>
-              <a-button>Edit 一 {{ record.name }}</a-button>
+              <a-button>Edit</a-button>
               <a-divider type="vertical" />
               <a-popconfirm
                 title="Are you sure you want to delete this user?"
