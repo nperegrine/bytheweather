@@ -14,9 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return response()->json([
-        'message' => 'all systems are a go',
-        'users' => \App\Models\User::all(),
-    ]);
+/**
+ * BY THE WEATHER API ROUTES
+ */
+
+Route::prefix('users')->group(function() { 
+    # Users API
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/', 'index')->name('users.index');
+        Route::post('/', 'store')->name('users.store');
+        Route::get('/{user}', 'show')->name('users.show');
+        Route::post('/{user}', 'update')->name('users.update');
+        Route::delete('/{user}', 'delete')->name('users.delete');
+    });
+
+    # Users Place API
+    Route::controller(UserPlaceController::class)->group(function () {
+        Route::get('/{user}/place', 'getPlace')->name('users.place');
+    });
+
+    # Users Weather API
+    Route::controller(UserWeatherController::class)->group(function () {
+        Route::get('/{user}/weather', 'getWeather')->name('users.weather');
+    });
 });
