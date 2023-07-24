@@ -10,14 +10,14 @@ export default {
         {
           key: "1",
           name: "Mike",
-          age: 32,
-          address: "10 Downing Street",
+          coordinates: "91,92",
+          weather: "28 degrees",
         },
         {
           key: "2",
           name: "John",
-          age: 42,
-          address: "10 Downing Street",
+          coordinates: "91,97",
+          weather: "26 degrees",
         },
       ],
 
@@ -28,14 +28,14 @@ export default {
           key: "name",
         },
         {
-          title: "Age",
-          dataIndex: "age",
-          key: "age",
+          title: "Coordinates",
+          dataIndex: "coordinates",
+          key: "coordinates",
         },
         {
-          title: "Address",
-          dataIndex: "address",
-          key: "address",
+          title: "Current Weather",
+          dataIndex: "weather",
+          key: "weather",
         },
       ],
     };

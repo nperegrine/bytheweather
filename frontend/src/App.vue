@@ -1,20 +1,22 @@
-<script setup lang="ts">
-import Header from "@/components/layout/Header.vue";
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <Header></Header>
-        <RouterLink to="/">Home</RouterLink>
-      </nav>
+  <body>
+    <!-- begin::responsive navbar-->
+    <header-layout></header-layout>
+
+    <!-- begin::page content-->
+    <div class="container">
+      <div class="text-center mt-5">
+        <RouterView />
+      </div>
     </div>
-  </header>
-  <RouterView />
+
+    <!-- begin::responsive footer -->
+    <footer-layout></footer-layout>
+  </body>
 </template>
 
-<style scoped>
-
-</style>
+<script setup lang="ts">
+import HeaderLayout from "@/components/layout/Header.vue";
+import FooterLayout from "@/components/layout/Footer.vue";
+import { RouterView } from "vue-router";
+</script>
