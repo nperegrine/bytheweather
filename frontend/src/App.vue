@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Header from "@/components/layout/Header.vue";
 import { RouterLink, RouterView } from "vue-router";
 </script>
 
@@ -6,6 +7,7 @@ import { RouterLink, RouterView } from "vue-router";
   <header>
     <div class="wrapper">
       <nav>
+        <Header></Header>
         <RouterLink to="/">Home</RouterLink>
       </nav>
     </div>
