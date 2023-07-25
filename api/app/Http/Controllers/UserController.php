@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\User\SaveRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
@@ -53,15 +53,16 @@ class UserController extends Controller
      *
      * @return JsonResponse
      */
-    public function update(SaveUserRequest $request, User $user): JsonResponse
+    public function update(SaveRequest $request, User $user): JsonResponse
     {
-        $user = $this->userService->save($request->validated());
+        $user->fill($request->validated());
+        $user = $this->userService->save($user);
 
         return $this->successResponse(new UserResource($user));
     }
 
     /**
-     * Returns the user with the ID as a param
+     * Deletes the user with the ID as a param
      *
      * @param User $user
      * @return JsonResponse

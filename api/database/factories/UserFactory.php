@@ -34,7 +34,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(
             function () {
-                Artisan::call('weather:fetch');
+               // Artisan::call('weather:fetch');
             }
         );
     }

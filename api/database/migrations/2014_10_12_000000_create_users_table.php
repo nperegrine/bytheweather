@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('longitude', 11, 8);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

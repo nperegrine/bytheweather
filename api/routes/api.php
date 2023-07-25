@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserCoordinateController;
+use App\Http\Controllers\UserWeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,20 +24,20 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('users')->group(function() { 
     # Users API
     Route::controller(UserController::class)->group(function () {
-        Route::get('/', 'index')->name('users.index');
+        Route::get('/', 'list')->name('users.index');
         Route::post('/', 'store')->name('users.store');
         Route::get('/{user}', 'show')->name('users.show');
-        Route::post('/{user}', 'update')->name('users.update');
-        Route::delete('/{user}', 'delete')->name('users.delete');
+        Route::post('/{user}/update', 'update')->name('users.update');
+        Route::delete('/{user}/delete', 'destroy')->name('users.delete');
     });
 
     # Users Place API
-    Route::controller(UserPlaceController::class)->group(function () {
-        Route::get('/{user}/place', 'getPlace')->name('users.place');
+    Route::controller(UserCoordinateController::class)->group(function () {
+        Route::get('/{user}/coordinates', 'show')->name('users.coordinates');
     });
 
     # Users Weather API
     Route::controller(UserWeatherController::class)->group(function () {
-        Route::get('/{user}/weather', 'getWeather')->name('users.weather');
+        Route::get('/{user}/weather', 'show')->name('users.weather');
     });
 });

@@ -2,28 +2,29 @@
 
 namespace Tests\Feature\Console\Commands;
 
-use App\Jobs\FetchWeatherJob;
+use App\Events\WeatherUpdated;
 use App\Models\User;
-use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class BroadcastWeatherCommandTest extends TestCase
 {
     /**
      * Test that we can successfully dispatch the
-     * job to fetch the weather updates of each user
+     * event to broadcast the weather updates of each user
      * 
+     * @return void
      */
-    public function it_dispatches_fetch_jobs(): void
+    public function test_can_broadcast_weather_updates_to_users(): void
     {
-        Queue::fake();
+        Event::fake();
         $user = User::factory()->create();
 
-        $this->artisan('weather:fetch')
+        $this->artisan('weather:update')
             ->assertExitCode(0);
 
-        Queue::assertPushed(FetchWeatherJob::class, function ($job, $user) {
-            $this->assertTrue($job->user->is($user));
+        Event::assertDispatched(WeatherUpdated::class, function ($event)  use ($user) {
+            $this->assertTrue($event->user->is($user));
             return true;
         });
     }

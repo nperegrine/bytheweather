@@ -9,6 +9,7 @@ use App\Http\Responses\Std500Response;
 use App\Http\Responses\StdEmptyResponse;
 use App\Http\Responses\StdEmptyResponseInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response as HttpStatusCode;
 
 trait ResponseUtils

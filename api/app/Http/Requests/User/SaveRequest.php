@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Rules\LatitudeRule;
-use App\Rules\LongitudeRule;
+use App\Rules\Latitude;
+use App\Rules\Longitude;
 
-class SaveUserRequest extends FormRequest
+class SaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,8 +34,8 @@ class SaveUserRequest extends FormRequest
                     ->ignore($this->route('user')?->id)
                     ->withoutTrashed()
             ],
-            'latitude' => ['required', new LatitudeRule()],
-            'longitude' => ['required', new LongitudeRule()],
+            'latitude' => ['required', new Latitude],
+            'longitude' => ['required', new Longitude],
         ];
     }
 
