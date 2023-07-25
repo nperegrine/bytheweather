@@ -19,7 +19,7 @@ class UserController extends Controller
     }
 
     /**
-     * Returns a list of all users
+     * Returns a paginated list of all users
      *
      * @param Request $request
      * @return JsonResponse
@@ -46,9 +46,9 @@ class UserController extends Controller
     }
 
     /**
-     * Returns the user with the ID as a param
+     * Updates the user with the ID passed as param
      *
-     * @param Request $request
+     * @param SaveUserRequest $request
      * @param User $user
      *
      * @return JsonResponse

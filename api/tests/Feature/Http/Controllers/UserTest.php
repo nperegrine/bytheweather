@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    public function test_can_get_users(): void
+    public function test_can_list_users(): void
     {
         $users = User::factory()->count(2)->create();
 
@@ -69,21 +69,33 @@ class UserTest extends TestCase
                 ->assertJsonStructure(['errors', 'warnings']);
     }
 
+    public function test_can_delete_user_with_valid_id(): void
+    {
+        $user = User::factory()->make();
+
+        $response = $this->getJson(route('api.users.delete', ['user' => $user->id]));
+
+        $response->assertOk();
+        $this->assertDatabaseIsMissingRow($user);
+    }
+
+    public function test_cannot_delete_user_with_invalid_id(): void
+    {
+        $mockUserId = 'invalid_id';
+
+        $response = $this->getJson(route('api.users.delete', ['user' => $mockUserId]));
+
+        $response->assertStatus(ErrorCodes::STD400)
+                ->assertJsonStructure(['errors', 'warnings']);
+    }
+
     private function assertJsonHasUser(AssertableJson $json, User $user): void
     {
         $json->where('id', $user->id)
             ->where('name', $user->name)
+            ->where('latitude', $user->latitude)
+            ->where('longitude', $user->longitude)
             ->etc();
-
-        if ($user->coordinates->isNotEmpty()) {
-            $json->has(
-                'coordinates',
-                $user->coordinates()->count(),
-                fn($json) => $this->assertJsonHasUser($json, $user->coordinates)
-            );
-        }
-
-        $json->etc();
     }
 
     private function assertDatabaseHasRow(User $user): void
@@ -91,16 +103,21 @@ class UserTest extends TestCase
         $this->assertDatabaseHas(
             'users',
             [
-                'name' => $user->name,
+                'name'      => $user->name,
+                'latitude'  => $user->latitude,
+                'longitude' => $user->longitude,
             ]
         );
+    }
 
-        $this->assertDatabaseHas(
-            'coordinates',
+    private function assertDatabaseIsMissingRow(User $user): void
+    {
+        $this->assertDatabaseMissing(
+            'users',
             [
-                'user_id' => $user->id,
-                'latitude' => $user->coordinates->latitude,
-                'longitude' => $user->coordinates->longitude,
+                'name'      => $user->name,
+                'latitude'  => $user->latitude,
+                'longitude' => $user->longitude,
             ]
         );
     }

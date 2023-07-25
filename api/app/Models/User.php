@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasWeather;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasWeather;
 
     /**
      * The attributes that are mass assignable.
@@ -50,15 +50,5 @@ class User extends Authenticatable
     public function place(): HasOne
     {
         return $this->hasOne(Place::class);
-    }
-
-    /**
-     * Returns the weather of the user
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function weather(): HasOneThrough
-    {
-        return $this->hasOneThrough(Weather::class, Place::class);
     }
 }

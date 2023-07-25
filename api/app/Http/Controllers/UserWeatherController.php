@@ -16,6 +16,6 @@ class UserWeatherController extends Controller
      */
     public function show($user): JsonResponse
     {
-        return $this->successResponse(new WeatherResource($user->weather));
+        return $this->successResponse(new WeatherResource($user->getWeather()));
     }
 }
