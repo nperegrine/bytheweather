@@ -24,7 +24,7 @@ class UserTest extends TestCase
             );
     }
 
-    public function test_can_show_user_with_weather(): void
+    public function test_can_show_user_correctly_with_weather_field(): void
     {
         $mockUser = User::factory()->create(['id' => 1]);
 
@@ -32,7 +32,16 @@ class UserTest extends TestCase
 
         $response->assertOk()
                 ->assertJsonMissing(['errors'])
-                ->assertJsonStructure(['item']);
+                ->assertJsonStructure(['item' =>
+                    [
+                      'id',
+                      'name',
+                      'email',
+                      'latitude',
+                      'longitude',
+                      'weather'
+                    ]
+                  ]);
     }
 
     public function test_cannot_show_user_with_invalid_id(): void
@@ -51,14 +60,14 @@ class UserTest extends TestCase
         $response = $this->deleteJson(route('users.delete', ['user' => $mockUser->id]));
 
         $response->assertOk();
-        $this->assertDatabaseIsMissingRow($mockUser);
+        $this->assertSoftDeleted($mockUser);
     }
 
     public function test_cannot_delete_user_with_invalid_id(): void
     {
         $mockUserId = 'invalid_id';
 
-        $response = $this->getJson(route('users.delete', ['user' => $mockUserId]));
+        $response = $this->deleteJson(route('users.delete', ['user' => $mockUserId]));
 
         $response->assertStatus(ErrorCodes::STD404);
     }
@@ -70,17 +79,5 @@ class UserTest extends TestCase
             ->where('latitude', $user->latitude)
             ->where('longitude', $user->longitude)
             ->etc();
-    }
-
-    private function assertDatabaseIsMissingRow(User $user): void
-    {
-        $this->assertDatabaseMissing(
-            'users',
-            [
-                'name'      => $user->name,
-                'latitude'  => $user->latitude,
-                'longitude' => $user->longitude,
-            ]
-        );
     }
 }

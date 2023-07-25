@@ -26,6 +26,10 @@ trait HasWeather
      */
     public function updateWeather($data): void
     {
+        if (!$data) {
+            return;
+        }
+        
         Cache::remember('weather:user:'.$this->id, now()->addHours(1), function () use ($data) {
                 return $data;
             });

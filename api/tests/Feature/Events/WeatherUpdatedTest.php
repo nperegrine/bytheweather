@@ -11,12 +11,12 @@ class WeatherUpdatedTest extends TestCase
     /**
      * @test
      */
-    public function test_can_dispatch_weather_update_event(): void
+    public function test_can_dispatch_weather_broadcast_event(): void
     {
         Event::fake();
         $user = User::factory()->create();
 
-        $this->artisan('weather:update')
+        $this->artisan('weather:broadcast')
             ->assertExitCode(0);
 
         Event::assertDispatched(WeatherUpdated::class, function ($event)  use ($user) {

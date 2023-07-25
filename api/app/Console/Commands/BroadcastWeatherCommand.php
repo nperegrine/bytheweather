@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Events\WeatherUpdated;
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 
 class BroadcastWeatherCommand extends Command
 {

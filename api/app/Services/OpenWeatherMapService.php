@@ -6,8 +6,9 @@ use App\Contracts\Integrations\WeatherServiceContract;
 use App\Models\User;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
-class OpenWeatherMapServices implements WeatherServiceContract
+class OpenWeatherMapService implements WeatherServiceContract
 {
      /**
      * @param User $user
@@ -18,8 +19,13 @@ class OpenWeatherMapServices implements WeatherServiceContract
     public function fetchCurrentWeather(User $user)
     {
         $response = Http::openWeatherMapAPI()
-                        ->post('/data/2.5/weather?lat='.$user->latitude/'&lon='.$user->longitude.'&appid='.strval(config('services.open-weather-map.key')));
+                        ->get("/data/3.0/onecall?lat={$user->latitude}&lon={$user->latitude}&appid=".strval(config('services.open-weather-map.key')));
 
-        return $response->json()['access_token'];
+        if ($response->successful()){
+            return $response->json()['current'];
+        } else {
+            Log::error('Error fetching weather update for user:'.$user->id);
+            return null;
+        }
     }
 }

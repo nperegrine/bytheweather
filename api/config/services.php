@@ -32,7 +32,7 @@ return [
     ],
 
     'open-weather-map' => [
-        'endpoint' => env('OPEN_WEATHER_MAP_ENDPOINT'),
+        'endpoint' => env('OPEN_WEATHER_MAP_API_ENDPOINT'),
         'key' => env('OPEN_WEATHER_MAP_API_KEY'),
     ],
 
