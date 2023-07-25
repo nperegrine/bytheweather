@@ -19,9 +19,10 @@ export const useUserStore = defineStore({
         .then((response) => {
           this.users = response.items;
         })
-        .catch((errors) => {
+        .catch((error) => {
+          console.log(error);
           const messageStore = useMessageStore();
-          messageStore.displayErrorMessage(errors.data.message);
+          messageStore.displayErrorMessage(error.message || error.data.message);
         });
     },
     async storeUser(form) {
@@ -33,9 +34,9 @@ export const useUserStore = defineStore({
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully added");
         })
-        .catch((errors) => {
+        .catch((error) => {
           const messageStore = useMessageStore();
-          messageStore.displayErrorMessage(errors.data.message);
+          messageStore.displayErrorMessage(error.message || error.data.message);
         });
     },
     async showUser(userId) {
@@ -44,9 +45,9 @@ export const useUserStore = defineStore({
         .then((response) => {
           return response.item;
         })
-        .catch((errors) => {
+        .catch((error) => {
           const messageStore = useMessageStore();
-          messageStore.displayErrorMessage(errors.data.message);
+          messageStore.displayErrorMessage(error.message || error.data.message);
         });
     },
     async updateUser(form, userId) {
@@ -56,9 +57,9 @@ export const useUserStore = defineStore({
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully updated");
         })
-        .catch((errors) => {
+        .catch((error) => {
           const messageStore = useMessageStore();
-          messageStore.displayErrorMessage(errors.data.message);
+          messageStore.displayErrorMessage(error.message || error.data.message);
         });
     },
     async deleteUser(userId) {
@@ -74,9 +75,9 @@ export const useUserStore = defineStore({
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully deleted");
         })
-        .catch((errors) => {
+        .catch((error) => {
           const messageStore = useMessageStore();
-          messageStore.displayErrorMessage(errors.data.message);
+          messageStore.displayErrorMessage(error.message || error.data.message);
         });
     },
     async findOrFetchUser(userId) {

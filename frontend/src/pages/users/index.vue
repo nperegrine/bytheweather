@@ -18,7 +18,7 @@
         :columns="columns"
         :data-source="users"
         :locale="{
-          emptyText: `Users will show up here`,
+          emptyText: `Users and their current weather will show up here`,
         }"
         class="mt-5"
         rowKey="id"
@@ -65,23 +65,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue";
-
-const users = ref([
-  {
-    id: "1",
-    name: "Mike Andreezen",
-    coordinates: "91,92",
-    weather: "28 degrees",
-  },
-  {
-    id: "2",
-    name: "John Fillipo",
-    coordinates: "91,97",
-    weather: "26 degrees",
-  },
-]);
+import { useUserStore } from "@/stores/modules/users";
 
 const columns = ref([
   {
@@ -104,4 +90,13 @@ const columns = ref([
     key: "actions",
   },
 ]);
+
+const userStore = useUserStore();
+const users = computed(() => userStore.users);
+
+const getUsers = () => {
+  userStore.getUsers();
+};
+
+onMounted(getUsers);
 </script>
