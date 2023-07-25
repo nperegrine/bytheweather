@@ -11,13 +11,13 @@
           >Users</router-link
         ></a-breadcrumb-item
       >
-      <a-breadcrumb-item>User - {{ userId }} </a-breadcrumb-item>
+      <a-breadcrumb-item>Edit User &mdash; {{ userId }} </a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
       <h4>Edit User</h4>
 
       <!-- begin::user update form -->
-      <div v-if="Object.keys(user).length === 0">
+      <div v-if="Object.keys(user).length > 0">
         <a-form
           :layout="formState.layout"
           :model="user"
@@ -38,6 +38,22 @@
             <a-input
               v-model:value="user.name"
               placeholder="Please enter a user name"
+            />
+          </a-form-item>
+
+          <a-form-item
+            label="Email"
+            name="email"
+            :rules="[
+              {
+                required: true,
+                message: 'Please enter the email of the user!',
+              },
+            ]"
+          >
+            <a-input
+              v-model:value="user.email"
+              placeholder="Please enter user email"
             />
           </a-form-item>
 

@@ -24,6 +24,17 @@
         rowKey="id"
       >
         <template #bodyCell="{ column, record }">
+          <template v-if="column.key === 'coordinates'">
+            <code class="text-muted">
+              {{ record.latitude + "," + record.longitude }}
+            </code>
+          </template>
+          <template v-if="column.key === 'weather'">
+            <p v-if="record.weather !== null">
+              {{ record.weather.temp }} <sup>o</sup>
+            </p>
+            <p v-else>N/A</p>
+          </template>
           <template v-if="column.key === 'actions'">
             <span>
               <a-button
@@ -76,8 +87,7 @@ const columns = ref([
     key: "name",
   },
   {
-    title: "Coordinates",
-    dataIndex: "coordinates",
+    title: "Location",
     key: "coordinates",
   },
   {

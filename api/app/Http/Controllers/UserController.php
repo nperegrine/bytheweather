@@ -27,7 +27,7 @@ class UserController extends Controller
     public function list(Request $request): JsonResponse
     {
         $users = $this->userService->list(
-            (int) $request->get('size', 10),
+            (int) $request->get('size'),
             $request->get('sort', '')
         );
 

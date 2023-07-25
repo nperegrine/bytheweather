@@ -11,19 +11,43 @@
           >Users</router-link
         ></a-breadcrumb-item
       >
-      <a-breadcrumb-item>{{ user.name }} - {{ userId }} </a-breadcrumb-item>
+      <a-breadcrumb-item
+        >{{ user.name }} &mdash; {{ userId }}
+      </a-breadcrumb-item>
     </a-breadcrumb>
     <div
       class="text-center"
       :style="{ padding: '24px', background: '#fff', minHeight: '360px' }"
     >
       <h4>Detailed Weather Report</h4>
+      <small class="text-muted">{{ user.name }}</small>
 
-      <!-- begin::user update form -->
+      <!-- begin::weather data -->
       <div v-if="Object.keys(user).length > 0">
-        <p>Detailed weather report will show up here.</p>
+        <div v-if="user.weather !== null" class="text-start">
+          <a-divider>Basic</a-divider>
+          <p v-for="(value, propertyName) in user.weather" :key="propertyName">
+            <span v-if="propertyName !== 'weather'"
+              ><b>{{ propertyName }}:</b> {{ value }}</span
+            >
+            <span v-else>
+              <a-divider>Weather</a-divider>
+              <p
+                v-for="(value, innerPropertyName) in user.weather.weather[0]"
+                :key="innerPropertyName"
+              >
+                <b>{{ innerPropertyName }}:</b> {{ value }}
+              </p>
+            </span>
+          </p>
+        </div>
+        <div v-else class="mt-3">
+          <p class="text-danger">
+            No weather data available at the moment, please check back shortly.
+          </p>
+        </div>
       </div>
-      <!-- end::user update form -->
+      <!-- end::weather data -->
 
       <!-- begin::loading -->
       <div v-else class="mt-2">

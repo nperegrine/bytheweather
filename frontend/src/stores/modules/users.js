@@ -17,7 +17,7 @@ export const useUserStore = defineStore({
       axios
         .get(`/users`)
         .then((response) => {
-          this.users = response.items;
+          this.users = response.data.items;
         })
         .catch((error) => {
           console.log(error);
@@ -29,7 +29,7 @@ export const useUserStore = defineStore({
       axios
         .post(`/users`, { form })
         .then((response) => {
-          this.users.push(response.item);
+          this.users.push(response.data.item);
 
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully added");
@@ -43,7 +43,7 @@ export const useUserStore = defineStore({
       axios
         .get(`/users/${userId}`)
         .then((response) => {
-          return response.item;
+          return response.data.item;
         })
         .catch((error) => {
           const messageStore = useMessageStore();
@@ -52,7 +52,7 @@ export const useUserStore = defineStore({
     },
     async updateUser(form, userId) {
       axios
-        .post(`/users/${userId}`, { form })
+        .post(`/users/${userId}/update`, form)
         .then(() => {
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully updated");
@@ -64,7 +64,7 @@ export const useUserStore = defineStore({
     },
     async deleteUser(userId) {
       axios
-        .delete(`/users/${userId}`)
+        .delete(`/users/${userId}/delete`)
         .then(() => {
           this.users.map((user, index) => {
             if (user.id === userId) {
