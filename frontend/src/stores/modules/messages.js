@@ -1,3 +1,4 @@
+import { defineStore } from "pinia";
 import { message } from "ant-design-vue";
 import { notification } from "ant-design-vue";
 
@@ -23,7 +24,3 @@ export const useMessageStore = defineStore({
     },
   },
 });
-
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useMessageStore, import.meta.hot));
-// }

@@ -1,7 +1,7 @@
-// import axios from "axios";
+import axios from "@/plugins/axios";
 
+import { defineStore } from "pinia";
 import { useMessageStore } from "@/stores/modules/messages";
-const messageStore = useMessageStore();
 
 export const useUserStore = defineStore({
   id: "users",
@@ -20,6 +20,7 @@ export const useUserStore = defineStore({
           this.users = response.items;
         })
         .catch((errors) => {
+          const messageStore = useMessageStore();
           messageStore.displayErrorMessage(errors.data.message);
         });
     },
@@ -28,9 +29,12 @@ export const useUserStore = defineStore({
         .post(`/users`, { form })
         .then((response) => {
           this.users.push(response.item);
+
+          const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully added");
         })
         .catch((errors) => {
+          const messageStore = useMessageStore();
           messageStore.displayErrorMessage(errors.data.message);
         });
     },
@@ -41,6 +45,7 @@ export const useUserStore = defineStore({
           return response.item;
         })
         .catch((errors) => {
+          const messageStore = useMessageStore();
           messageStore.displayErrorMessage(errors.data.message);
         });
     },
@@ -48,9 +53,11 @@ export const useUserStore = defineStore({
       axios
         .post(`/users/${userId}`, { form })
         .then(() => {
+          const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully updated");
         })
         .catch((errors) => {
+          const messageStore = useMessageStore();
           messageStore.displayErrorMessage(errors.data.message);
         });
     },
@@ -64,9 +71,11 @@ export const useUserStore = defineStore({
             }
           });
 
+          const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully deleted");
         })
         .catch((errors) => {
+          const messageStore = useMessageStore();
           messageStore.displayErrorMessage(errors.data.message);
         });
     },
@@ -80,7 +89,3 @@ export const useUserStore = defineStore({
     },
   },
 });
-
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
-}

@@ -26,7 +26,11 @@
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'actions'">
             <span>
-              <a-button type="primary" ghost @click="$router.push('/users/1')">
+              <a-button
+                type="primary"
+                ghost
+                @click="$router.push('/users/' + record.id)"
+              >
                 View More</a-button
               >
               <a-divider type="vertical" />
@@ -59,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, h } from "vue";
+import { ref } from "vue";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue";
 
 const users = ref([
