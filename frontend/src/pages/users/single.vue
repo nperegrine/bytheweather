@@ -1,11 +1,22 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0">
-      <a-breadcrumb-item>Home</a-breadcrumb-item>
-      <a-breadcrumb-item>Users</a-breadcrumb-item>
-      <a-breadcrumb-item>User - {{ userId }} </a-breadcrumb-item>
+      <a-breadcrumb-item
+        ><router-link to="/" class="nav-link"
+          >Home</router-link
+        ></a-breadcrumb-item
+      >
+      <a-breadcrumb-item
+        ><router-link to="/users" class="nav-link"
+          >Users</router-link
+        ></a-breadcrumb-item
+      >
+      <a-breadcrumb-item>{{ user.name }} - {{ userId }} </a-breadcrumb-item>
     </a-breadcrumb>
-    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
+    <div
+      class="text-center"
+      :style="{ padding: '24px', background: '#fff', minHeight: '360px' }"
+    >
       <h4>Detailed Weather Report</h4>
 
       <!-- begin::user update form -->
@@ -30,7 +41,7 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const userId = route.params.id;
-let user = ref({});
+const user = ref({});
 
 const userStore = useUserStore();
 

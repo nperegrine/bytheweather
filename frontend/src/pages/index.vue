@@ -5,23 +5,17 @@
     class="mt-5"
   >
     <template #icon>
-      <team-outlined />
+      <cloud-sync-outlined />
     </template>
     <template #extra>
-      <a-button type="primary"
-        ><router-link to="/users" class="nav-link"
-          >Discover Users</router-link
-        ></a-button
+      <a-button type="primary" @click="$router.push('/users')"
+        >Discover Users</a-button
       >
-      <a-button
-        ><router-link to="/users" class="nav-link"
-          >Get started</router-link
-        ></a-button
-      >
+      <a-button @click="$router.push('/users')">Get started</a-button>
     </template>
   </a-result>
 </template>
 
-<script setup lang="ts">
-import { TeamOutlined } from "@ant-design/icons-vue";
+<script setup>
+import { CloudSyncOutlined } from "@ant-design/icons-vue";
 </script>

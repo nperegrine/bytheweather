@@ -5,7 +5,7 @@
 
     <!-- begin::page content-->
     <div class="container">
-      <div class="text-center mt-5">
+      <div class="mt-5">
         <RouterView />
       </div>
     </div>
@@ -15,7 +15,7 @@
   </body>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import HeaderLayout from "@/components/layout/Header.vue";
 import FooterLayout from "@/components/layout/Footer.vue";
 import { RouterView } from "vue-router";

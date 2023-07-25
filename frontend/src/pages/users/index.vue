@@ -35,7 +35,9 @@
               >
               <a-divider type="vertical" />
               <a-tooltip title="Edit user">
-                <a-button class="pt-0"
+                <a-button
+                  class="pt-0"
+                  @click="$router.push('/users/' + record.id + '/edit')"
                   ><form-outlined
                     :style="{ fontSize: '16px', color: '#5A5A5A' }"
                 /></a-button>
@@ -68,14 +70,14 @@ import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue";
 
 const users = ref([
   {
-    key: "1",
-    name: "Mike",
+    id: "1",
+    name: "Mike Andreezen",
     coordinates: "91,92",
     weather: "28 degrees",
   },
   {
-    key: "2",
-    name: "John",
+    id: "2",
+    name: "John Fillipo",
     coordinates: "91,97",
     weather: "26 degrees",
   },
