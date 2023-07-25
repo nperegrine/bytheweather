@@ -1,7 +1,5 @@
 import { message } from "ant-design-vue";
 import { notification } from "ant-design-vue";
-import "ant-design-vue/lib/message/style/index.css";
-import "ant-design-vue/lib/notification/style/index.css";
 
 export const useMessageStore = defineStore({
   id: "messages",
@@ -26,6 +24,6 @@ export const useMessageStore = defineStore({
   },
 });
 
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useMessageStore, import.meta.hot));
-}
+// if (import.meta.hot) {
+//   import.meta.hot.accept(acceptHMRUpdate(useMessageStore, import.meta.hot));
+// }

@@ -1,17 +1,16 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0">
-      <a-breadcrumb-item>Home</a-breadcrumb-item>
+      <a-breadcrumb-item
+        ><router-link to="/" class="nav-link"
+          >Home</router-link
+        ></a-breadcrumb-item
+      >
       <a-breadcrumb-item>Users</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
       <h4>
         <span class="float-start">All Users</span>
-        <span class="float-end">
-          <a-button type="primary"
-            ><nuxt-link to="/users/new">Add User</nuxt-link></a-button
-          >
-        </span>
       </h4>
 
       <!-- begin::users list table -->
@@ -19,7 +18,7 @@
         :columns="columns"
         :data-source="users"
         :locale="{
-          emptyText: `Users you add will show up here`,
+          emptyText: `Users will show up here`,
         }"
         class="mt-5"
         rowKey="id"
@@ -27,7 +26,16 @@
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'actions'">
             <span>
-              <a-button>Edit</a-button>
+              <a-button type="primary" ghost @click="$router.push('/users/1')">
+                View More</a-button
+              >
+              <a-divider type="vertical" />
+              <a-tooltip title="Edit user">
+                <a-button class="pt-0"
+                  ><form-outlined
+                    :style="{ fontSize: '16px', color: '#5A5A5A' }"
+                /></a-button>
+              </a-tooltip>
               <a-divider type="vertical" />
               <a-popconfirm
                 title="Are you sure you want to delete this user?"
@@ -35,7 +43,11 @@
                 cancel-text="No"
                 @confirm="userStore.deleteUser(record.id)"
               >
-                <a-button danger>Delete</a-button>
+                <a-tooltip title="Delete user">
+                  <a-button danger class="pt-0"
+                    ><delete-outlined :style="{ fontSize: '16px' }"
+                  /></a-button>
+                </a-tooltip>
               </a-popconfirm>
             </span>
           </template>
@@ -47,7 +59,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, h } from "vue";
+import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue";
 
 const users = ref([
   {

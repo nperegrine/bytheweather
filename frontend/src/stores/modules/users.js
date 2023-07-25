@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-import { useMessageStore } from "~~/store/modules/messages";
+import { useMessageStore } from "@/stores/modules/messages";
 const messageStore = useMessageStore();
 
 export const useUserStore = defineStore({

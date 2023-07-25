@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <RouterLink to="/" class="navbar-brand">By The Weather</RouterLink>
+      <router-link to="/" class="navbar-brand font-monospace"
+        >By The Weather</router-link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -16,20 +18,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
+            <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
-              >All Users</a
-            >
+            <router-link to="/users" class="nav-link">Users</router-link>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#">Add User</a></li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
-
-<script setup lang="ts">
-import { RouterLink } from "vue-router";
-</script>
