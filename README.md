@@ -1,48 +1,95 @@
-# Fullstack Challenge
+<h1 align="center">
+    By The Weather App
+</h1>
 
-## Instructions
-Using Laravel and VueJS, create an application which shows the weather for a set of users.
-- Clone this repository (not fork). 
-- Once completed, send a link of the clone repository to interviewer and let them know how long the exercise took. 
-- Update the frontend landing page to show a list of users and their current weather.
-- Clicking a user opens a modal or screen which shows that users detailed weather report.
-- Weather update should be no older than 1 hour.
-- Internal API request(s) to retrieve weather data should take no longer than 500ms. Consider that external APIs could and will take longer than this from time to time and should be accounted for. 
-- We are looking for attention to detail!
-- Instructions are purposely left somewhat open-ended to allow the developer to make some of their own decisions on implementation and design. 
-- This is not a designer test so the frontend does not have to look "good", but of course bonus points if you can make it look appealing. 
+## Live Demo
 
-## Things to consider:
-- Chose your own weather api such as https://openweathermap.org/api or https://www.weather.gov/documentation/services-web-api.
-- Testability.
-- Best practices.
-- Design patterns.
-- Availability of external APIs is not guaranteed and should not cause page to crash.
-- Twenty randomized users are added via the seeder process, each having their own unique location (longitude and latitude).
-- Redis is available (Docker service) if you wish to use it.
-- Queues, workers, websockets could be useful.
-- Feel free to use a frontend UI library such as PrimeVue, Vuetify, Bootstrap, Tailwind, etc. 
-- Anything else you want to do to show off your coding chops!
+An online demo hosted on Heroku can be found at the following links:
 
-## To run the local dev environment:
+- [**Front-end**](https://bytheweather-84845ea2aa8d.herokuapp.com/)
+- [**Back-end**](https://bytheweatherapi-7d0ff1f897e6.herokuapp.com/)
 
-### API
-- Navigate to `/api` folder
-- Ensure version docker installed is active on host
-- Copy .env.example: `cp .env.example .env`
-- Start docker containers `docker compose up` (add `-d` to run detached)
-- Connect to container to run commands: `docker exec -it fullstack-challenge-app-1 bash`
-  - Make sure you are in the `/var/www/html` path
-  - Install php dependencies: `composer install`
-  - Setup app key: `php artisan key:generate`
-  - Migrate database: `php artisan migrate` 
-  - Seed database: `php artisan db:seed`
-  - Run tests: `php artisan test`
-- Visit api: `http://localhost`
+Feel free to check out and play around with the online demo as much as needed.
 
-### Frontend
-- Navigate to `/frontend` folder
-- Ensure nodejs v18 is active on host
-- Install javascript dependencies: `npm install`
-- Run frontend: `npm run dev`
-- Visit frontend: `http://localhost:5173`
+## About
+
+This repository contains a simple application called "By The Weather" which aims to simplify real-time weather updates for users.
+The application demonstrates how to implement the following features using standard coding conventions with Laravel and VueJS respectively.
+
+- Fetching and caching weather data for users
+- Displaying weather data for users in real-time
+
+The skills demonstrated:
+
+- PHP 8.1
+- Laravel 10
+- MySQL 8
+- VueJS 3
+- Pinia
+- Ant Design Vue 4
+- Bootstrap CSS
+
+Feature showcases:
+
+- HTTP JSON API
+- External API integration
+- Queues, workers, caching and web sockets
+- **Testing**: Feature tests
+- **Best practices**: SOLID principles, design patterns, TDD
+
+<i><b>Note:</b> To keep things really simple and short, authentication and authorization have been avoided.
+Also, for the same reason, multi-user scenario has been ignored.</i>
+
+## Tasks
+
+Planning
+
+- [x] Review of project, creation, estimation of tasks and project setup (15 mins)
+
+Frontend
+
+- [x] Setup Ant Design Vue and Bootstrap CSS (15 mins)
+- [x] Create user list page with a data table to view users and their current weather (25 mins)
+- [x] Create user details page to show detailed weather report (30 mins)
+- [x] Create user pinia store actions (30 mins)
+- [x] Integrate API endpoints (30 mins)
+- [x] Install and setup pusher (30 mins)
+
+Backend (using TDD)
+
+- [x] Write unit and acceptance tests for API (30 mins)
+- [x] Update database migrations (5 mins)
+- [x] Update project models (15 mins)
+- [x] Update database factories (15 mins)
+- [x] Update database seeders (10 mins)
+- [x] Create Users API routes (5 mins)
+- [x] Create Users API routes controller and delegate CRUD actions to User Service (30 mins)
+- [x] Create Weather Service (30 mins)
+- [x] Create Weather Update Job and Commands (10 mins)
+- [x] Schedule Weather Update Job (5 mins)
+- [x] Install and setup pusher for weather update broadcasting to frontend (5 mins)
+- [x] Broadcast weather updates to frontend (15 mins)
+
+**Estimated Duration**
+
+- Coding: 6 hours
+- Cumulative: 9 hours
+
+## Installation/Setup
+
+In addition to the initial project installation instructions (which still apply), please run the following commands on the backend after installation to get everything working perfectly.
+
+1. `php artisan weather:fetch`
+2. `php artisan weather:broadcast` (ensure to enable event broadcasting otherwise command may fail)
+
+**Important**: Set the Open Weather API `OPEN_WEATHER_MAP_API_ENDPOINT`, `OPEN_WEATHER_MAP_API_KEY`, `PUSHER` and Queue (REDIS) configuration variables correctly in your .env file.
+
+## Running Tests
+
+    php artisan test
+
+## API Documentation
+
+I've included for you the full documentation of the "By The Weather" API below.
+
+https://documenter.getpostman.com/view/1828213/2s946o59fM
