@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Enums\ErrorCodes;
 use App\Models\User;

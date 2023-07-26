@@ -27,7 +27,7 @@ class FetchWeatherCommand extends Command
      */
     public function handle(): void
     {
-        User::chunk(10, fn ($users) => $users->each(function ($user) {
+        User::chunk(100, fn ($users) => $users->each(function ($user) {
             FetchWeatherJob::dispatch($user);
         }));
     }

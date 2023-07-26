@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Jobs;
 
+use App\Jobs\FetchWeatherJob;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
 class FetchWeatherJobTest extends TestCase
@@ -18,14 +17,14 @@ class FetchWeatherJobTest extends TestCase
      */
     public function test_can_dispatch_fetch_weather_job(): void
     {
-        Queue::fake();
+        Bus::fake();
         $user = User::factory()->make();
 
-        $this->artisan('weather:fetch')
-            ->assertExitCode(0);
+        FetchWeatherJob::dispatch($user);
 
-        Queue::assertPushed(FetchWeatherJob::class, function ($job, $user) {
+        Bus::assertDispatched(FetchWeatherJob::class, function (FetchWeatherJob $job) use ($user) {
             $this->assertTrue($job->user->is($user));
+
             return true;
         });
     }

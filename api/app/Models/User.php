@@ -43,6 +43,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'latitude' => 'float',
+        'longitude' => 'float'
     ];
 
     /**
