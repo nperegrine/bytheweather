@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use App\Rules\Latitude;
 use App\Rules\Longitude;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveRequest extends FormRequest
 {
@@ -29,10 +29,10 @@ class SaveRequest extends FormRequest
             'email' => [
                 'required',
                 'max:250',
-                'email:rfc,dns',
+                'email',
                 Rule::unique('users', 'email')
                     ->ignore($this->route('user')?->id)
-                    ->withoutTrashed()
+                    ->withoutTrashed(),
             ],
             'latitude' => ['required', new Latitude],
             'longitude' => ['required', new Longitude],

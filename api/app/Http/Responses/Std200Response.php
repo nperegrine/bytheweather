@@ -15,7 +15,7 @@ class Std200Response extends StdResponse
     public $item;
 
     /**
-     * @param mixed $item
+     * @param  mixed  $item
      */
     public function setItem($item)
     {

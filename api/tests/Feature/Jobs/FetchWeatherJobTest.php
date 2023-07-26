@@ -12,8 +12,6 @@ class FetchWeatherJobTest extends TestCase
     /**
      * Test that we can successfully dispatch the
      * job to fetch the weather updates of each user
-     * 
-     * @return void
      */
     public function test_can_dispatch_fetch_weather_job(): void
     {

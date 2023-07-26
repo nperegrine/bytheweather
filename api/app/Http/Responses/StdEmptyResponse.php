@@ -19,8 +19,6 @@ class StdEmptyResponse implements StdEmptyResponseInterface
 
     /**
      * Initialize with a status code.
-     *
-     * @param null|int $statusCode
      */
     public function __construct(?int $statusCode = null)
     {

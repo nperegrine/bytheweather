@@ -17,9 +17,9 @@ class UserTest extends TestCase
 
         $response->assertOk()
             ->assertJson(
-                fn(AssertableJson $json) => $json->has('items', 2)
-                    ->has('items.1', fn($json) => $this->assertJsonHasUser($json, $users->get(0)))
-                    ->has('items.0', fn($json) => $this->assertJsonHasUser($json, $users->get(1)))
+                fn (AssertableJson $json) => $json->has('items', 2)
+                    ->has('items.1', fn ($json) => $this->assertJsonHasUser($json, $users->get(0)))
+                    ->has('items.0', fn ($json) => $this->assertJsonHasUser($json, $users->get(1)))
                     ->etc()
             );
     }
@@ -32,16 +32,15 @@ class UserTest extends TestCase
 
         $response->assertOk()
                 ->assertJsonMissing(['errors'])
-                ->assertJsonStructure(['item' =>
-                    [
-                      'id',
-                      'name',
-                      'email',
-                      'latitude',
-                      'longitude',
-                      'weather'
-                    ]
-                  ]);
+                ->assertJsonStructure(['item' => [
+                    'id',
+                    'name',
+                    'email',
+                    'latitude',
+                    'longitude',
+                    'weather',
+                ],
+                ]);
     }
 
     public function test_cannot_show_user_with_invalid_id(): void

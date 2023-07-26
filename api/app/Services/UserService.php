@@ -10,7 +10,7 @@ class UserService
 {
     public function list(int $perPage = PaginationCodes::PGN_SMALL, string $orderBy = 'id desc'): LengthAwarePaginator
     {
-        return User::with(['place'])->orderByRaw(!empty($orderBy) ? $orderBy : 'id desc')
+        return User::with(['place'])->orderByRaw(! empty($orderBy) ? $orderBy : 'id desc')
             ->paginate($perPage)
             ->withQueryString();
     }
@@ -18,7 +18,7 @@ class UserService
     public function save(User $user): User
     {
         $user->save();
-        
+
         return $user;
     }
 

@@ -6,7 +6,7 @@ import { useMessageStore } from "@/stores/modules/messages";
 export const useUserStore = defineStore({
   id: "users",
 
-  state: () => ({ users: [], currentUserId: null }),
+  state: () => ({ users: [], currentUserId: null, currentUser: {} }),
   getters: {
     getUser: (state) => {
       return state.users.find((f) => f.id === Number(state.currentUserId));
@@ -20,7 +20,6 @@ export const useUserStore = defineStore({
           this.users = response.data.items;
         })
         .catch((error) => {
-          console.log(error);
           const messageStore = useMessageStore();
           messageStore.displayErrorMessage(error.message || error.data.message);
         });
@@ -43,7 +42,7 @@ export const useUserStore = defineStore({
       axios
         .get(`/users/${userId}`)
         .then((response) => {
-          return response.data.item;
+          this.currentUser = response.data.item;
         })
         .catch((error) => {
           const messageStore = useMessageStore();
@@ -83,10 +82,17 @@ export const useUserStore = defineStore({
     async findOrFetchUser(userId) {
       if (this.users.length !== 0) {
         this.currentUserId = userId;
-        return this.getUser;
+        this.currentUser = this.getUser;
       } else {
-        return await this.showUser(userId);
+        await this.showUser(userId);
       }
+    },
+    async updateUserWeather(userId, weather) {
+      this.users.map((user, index) => {
+        if (user.id === userId) {
+          user.weather = weather;
+        }
+      });
     },
   },
 });

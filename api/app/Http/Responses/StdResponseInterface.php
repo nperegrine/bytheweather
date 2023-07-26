@@ -10,7 +10,6 @@ interface StdResponseInterface extends StdEmptyResponseInterface
     /**
      * Set an array of warnings into the response.
      *
-     * @param array $warnings
      *
      * @return void
      */
@@ -19,8 +18,7 @@ interface StdResponseInterface extends StdEmptyResponseInterface
     /**
      * Add a single warning to the response.
      *
-     * @param string $warning
-     *
+     * @param  string  $warning
      * @return void
      */
     public function addWarning($warning);

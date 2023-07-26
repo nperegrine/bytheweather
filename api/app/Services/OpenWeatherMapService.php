@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Log;
 
 class OpenWeatherMapService implements WeatherServiceContract
 {
-     /**
-     * @param User $user
-     *
+    /**
      * @return mixed
+     *
      * @throws GuzzleException
      */
     public function fetchCurrentWeather(User $user)
@@ -21,10 +20,11 @@ class OpenWeatherMapService implements WeatherServiceContract
         $response = Http::openWeatherMapAPI()
                         ->get("/data/3.0/onecall?lat={$user->latitude}&lon={$user->latitude}&appid=".strval(config('services.open-weather-map.key')));
 
-        if ($response->successful()){
+        if ($response->successful()) {
             return $response->json()['current'];
         } else {
             Log::error('Error fetching weather update for user:'.$user->id);
+
             return null;
         }
     }

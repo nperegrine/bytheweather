@@ -24,7 +24,7 @@ class WeatherServiceProvider extends ServiceProvider
     {
         Http::macro('openWeatherMapAPI', function () {
             return Http::withHeaders([
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ])->baseUrl(env('OPEN_WEATHER_MAP_API_ENDPOINT'));
         });
     }

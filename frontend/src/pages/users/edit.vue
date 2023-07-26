@@ -104,19 +104,19 @@
 </template>
 
 <script setup>
-import { defineComponent, reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/stores/modules/users";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const userId = route.params.id;
-const user = ref({});
 
 const formState = reactive({
   layout: "horizontal",
 });
 
 const userStore = useUserStore();
+const user = computed(() => userStore.currentUser);
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -127,7 +127,7 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const findUser = async () => {
-  user.value = await userStore.findOrFetchUser(userId);
+  await userStore.findOrFetchUser(userId);
 };
 
 onMounted(findUser);

@@ -20,9 +20,6 @@ class UserController extends Controller
 
     /**
      * Returns a paginated list of all users
-     *
-     * @param Request $request
-     * @return JsonResponse
      */
     public function list(Request $request): JsonResponse
     {
@@ -36,9 +33,6 @@ class UserController extends Controller
 
     /**
      * Find the user with ID passed in params
-     *
-     * @param User $user
-     * @return JsonResponse
      */
     public function show(User $user): JsonResponse
     {
@@ -48,10 +42,7 @@ class UserController extends Controller
     /**
      * Updates the user with the ID passed as param
      *
-     * @param SaveUserRequest $request
-     * @param User $user
-     *
-     * @return JsonResponse
+     * @param  SaveUserRequest  $request
      */
     public function update(SaveRequest $request, User $user): JsonResponse
     {
@@ -63,9 +54,6 @@ class UserController extends Controller
 
     /**
      * Deletes the user with the ID as a param
-     *
-     * @param User $user
-     * @return JsonResponse
      */
     public function destroy(User $user): JsonResponse
     {

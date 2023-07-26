@@ -3,7 +3,6 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCoordinateController;
 use App\Http\Controllers\UserWeatherController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +19,8 @@ use Illuminate\Support\Facades\Route;
 /**
  * BY THE WEATHER API ROUTES
  */
-
-Route::prefix('users')->group(function() { 
-    # Users API
+Route::prefix('users')->group(function () {
+    // Users API
     Route::controller(UserController::class)->group(function () {
         Route::get('/', 'list')->name('users.index');
         Route::post('/', 'store')->name('users.store');
@@ -31,12 +29,12 @@ Route::prefix('users')->group(function() {
         Route::delete('/{user}/delete', 'destroy')->name('users.delete');
     });
 
-    # Users Place API
+    // Users Place API
     Route::controller(UserCoordinateController::class)->group(function () {
         Route::get('/{user}/coordinates', 'show')->name('users.coordinates');
     });
 
-    # Users Weather API
+    // Users Weather API
     Route::controller(UserWeatherController::class)->group(function () {
         Route::get('/{user}/weather', 'show')->name('users.weather');
     });

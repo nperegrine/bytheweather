@@ -9,7 +9,6 @@ use App\Http\Responses\Std500Response;
 use App\Http\Responses\StdEmptyResponse;
 use App\Http\Responses\StdEmptyResponseInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response as HttpStatusCode;
 
 trait ResponseUtils
@@ -17,10 +16,8 @@ trait ResponseUtils
     /**
      * Returns a JSON response with a status code based on the provided response object
      *
-     * @param StdEmptyResponseInterface $response An object that implements
+     * @param  StdEmptyResponseInterface  $response An object that implements
      * the StdEmptyResponseInterface
-     *
-     * @return JsonResponse
      */
     private function response(StdEmptyResponseInterface $response): JsonResponse
     {
@@ -31,10 +28,7 @@ trait ResponseUtils
      * A helper method that returns error responses for requests that have been
      * validated but failed at another step
      *
-     * @param string $error
-     * @param int $type The type of error response (400 or 500).
-     *
-     * @return JsonResponse
+     * @param  int  $type The type of error response (400 or 500).
      */
     public function errorResponse(string $error, int $type = 500): JsonResponse
     {
@@ -47,8 +41,7 @@ trait ResponseUtils
     /**
      * A helper method for success response that returns lists
      *
-     * @param array $data
-     * @return JsonResponse
+     * @param  array  $data
      */
     public function successListResponse($data): JsonResponse
     {
@@ -62,8 +55,7 @@ trait ResponseUtils
     /**
      * A helper method for success response that returns a single item
      *
-     * @param mixed $data
-     * @return JsonResponse
+     * @param  mixed  $data
      */
     public function successResponse($data): JsonResponse
     {
@@ -76,8 +68,6 @@ trait ResponseUtils
 
     /**
      * A helper method for success response that returns empty response
-     *
-     * @return JsonResponse
      */
     public function successEmptyResponse(): JsonResponse
     {

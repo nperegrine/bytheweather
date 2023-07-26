@@ -15,11 +15,10 @@ class UserCoordinateTest extends TestCase
 
         $response->assertOk()
                 ->assertJsonMissing(['errors'])
-                ->assertJsonStructure(['item' =>
-                    [
-                      'latitude',
-                      'longitude',
-                    ]
-                  ]);
+                ->assertJsonStructure(['item' => [
+                    'latitude',
+                    'longitude',
+                ],
+                ]);
     }
 }

@@ -28,7 +28,10 @@
           <a-divider>Basic</a-divider>
           <p v-for="(value, propertyName) in user.weather" :key="propertyName">
             <span v-if="propertyName !== 'weather'"
-              ><b>{{ propertyName }}:</b> {{ value }}</span
+              ><b class="text-capitalize"
+                >{{ propertyName.replace("_", " ") }}:</b
+              >
+              {{ value }}</span
             >
             <span v-else>
               <a-divider>Weather</a-divider>
@@ -36,7 +39,8 @@
                 v-for="(value, innerPropertyName) in user.weather.weather[0]"
                 :key="innerPropertyName"
               >
-                <b>{{ innerPropertyName }}:</b> {{ value }}
+                <b class="text-capitalize">{{ innerPropertyName }}:</b>
+                {{ value }}
               </p>
             </span>
           </p>
@@ -51,7 +55,7 @@
 
       <!-- begin::loading -->
       <div v-else class="mt-2">
-        <p class="text-muted">Loading user data...</p>
+        <p class="text-muted">Loading data...</p>
       </div>
       <!-- end::loading -->
     </div>
@@ -62,15 +66,16 @@
 import { defineComponent, ref, onMounted } from "vue";
 import { useUserStore } from "@/stores/modules/users";
 import { useRoute } from "vue-router";
+import { computed } from "vue";
 
 const route = useRoute();
 const userId = route.params.id;
-const user = ref({});
 
 const userStore = useUserStore();
+const user = computed(() => userStore.currentUser);
 
 const findUser = async () => {
-  user.value = await userStore.findOrFetchUser(userId);
+  await userStore.findOrFetchUser(userId);
 };
 
 onMounted(findUser);

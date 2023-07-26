@@ -26,7 +26,7 @@ class Std500Response extends StdResponse
     /**
      * Add a single error to the response.
      *
-     * @param string $warning
+     * @param  string  $warning
      */
     public function addError($warning)
     {
@@ -36,7 +36,7 @@ class Std500Response extends StdResponse
     /**
      * Add a list of errors to the response.
      *
-     * @param array $warnings
+     * @param  array  $warnings
      */
     public function setErrors($warnings)
     {
