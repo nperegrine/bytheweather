@@ -2,7 +2,7 @@
     By The Weather App
 </h1>
 
-![Alt text](https://drive.google.com/uc?export=view&id=1IMKnjjrg_RjHiKYXV3sZUtC0q5EOEjPk "BTW Welcome Page")
+![Alt text](https://drive.google.com/uc?export=view&id=1l744BWGeHyWwNq74D1kP2lgXiuW9DtDx "BTW Home Page")
 
 ## Live Demo
 
