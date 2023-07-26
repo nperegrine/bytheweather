@@ -18,7 +18,11 @@
         :columns="columns"
         :data-source="users"
         :locale="{
-          emptyText: `Users and their current weather will show up here`,
+          emptyText: `Users and their weather will show up here`,
+        }"
+        :loading="{
+          spinning: loading,
+          indicator,
         }"
         class="mt-5"
         rowKey="id"
@@ -76,8 +80,12 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
-import { FormOutlined, DeleteOutlined } from "@ant-design/icons-vue";
+import { computed, ref, onMounted, h } from "vue";
+import {
+  FormOutlined,
+  DeleteOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons-vue";
 import { useUserStore } from "@/stores/modules/users";
 
 const columns = ref([
@@ -103,6 +111,14 @@ const columns = ref([
 
 const userStore = useUserStore();
 const users = computed(() => userStore.users);
+
+const loading = computed(() => userStore.loading);
+const indicator = h(LoadingOutlined, {
+  style: {
+    fontSize: "24px",
+  },
+  spin: true,
+});
 
 const getUsers = () => {
   userStore.getUsers();

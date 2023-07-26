@@ -6,7 +6,12 @@ import { useMessageStore } from "@/stores/modules/messages";
 export const useUserStore = defineStore({
   id: "users",
 
-  state: () => ({ users: [], currentUserId: null, currentUser: {} }),
+  state: () => ({
+    users: [],
+    currentUserId: null,
+    currentUser: {},
+    loading: true,
+  }),
   getters: {
     getUser: (state) => {
       return state.users.find((f) => f.id === Number(state.currentUserId));
@@ -14,14 +19,17 @@ export const useUserStore = defineStore({
   },
   actions: {
     async getUsers() {
+      this.loading = true;
       axios
         .get(`/users`)
         .then((response) => {
           this.users = response.data.items;
+          this.loading = false;
         })
         .catch((error) => {
           const messageStore = useMessageStore();
           messageStore.displayErrorMessage(error.message || error.data.message);
+          this.loading = false;
         });
     },
     async storeUser(form) {
@@ -50,18 +58,22 @@ export const useUserStore = defineStore({
         });
     },
     async updateUser(form, userId) {
+      this.loading = true;
       axios
         .post(`/users/${userId}/update`, form)
         .then(() => {
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully updated");
+          this.loading = false;
         })
         .catch((error) => {
           const messageStore = useMessageStore();
           messageStore.displayErrorMessage(error.message || error.data.message);
+          this.loading = false;
         });
     },
     async deleteUser(userId) {
+      this.loading = true;
       axios
         .delete(`/users/${userId}/delete`)
         .then(() => {
@@ -73,10 +85,12 @@ export const useUserStore = defineStore({
 
           const messageStore = useMessageStore();
           messageStore.displaySuccessMessage("User successfully deleted");
+          this.loading = false;
         })
         .catch((error) => {
           const messageStore = useMessageStore();
           messageStore.displayErrorMessage(error.message || error.data.message);
+          this.loading = false;
         });
     },
     async findOrFetchUser(userId) {

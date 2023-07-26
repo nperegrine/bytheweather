@@ -88,7 +88,13 @@
           <a-divider></a-divider>
 
           <a-form-item class="mt-4">
-            <a-button type="primary" html-type="submit">Update User</a-button>
+            <a-button
+              :loading="loading"
+              :disabled="loading"
+              type="primary"
+              html-type="submit"
+              >{{ !loading ? "Update User" : "Saving..." }}</a-button
+            >
           </a-form-item>
         </a-form>
       </div>
@@ -117,6 +123,8 @@ const formState = reactive({
 
 const userStore = useUserStore();
 const user = computed(() => userStore.currentUser);
+
+const loading = computed(() => userStore.loading);
 
 const onFinish = (values) => {
   console.log("Success:", values);
