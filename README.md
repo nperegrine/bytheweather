@@ -2,6 +2,8 @@
     By The Weather App
 </h1>
 
+![Alt text](https://drive.google.com/uc?export=view&id=1IMKnjjrg_RjHiKYXV3sZUtC0q5EOEjPk "BTW Welcome Page")
+
 ## Live Demo
 
 An online demo hosted on Heroku can be found at the following links:
